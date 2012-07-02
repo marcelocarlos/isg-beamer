@@ -1,0 +1,411 @@
+%
+% This is a example presentation file for ISG beamer themes. It also contains many examples of how to prepare slides using beamer.
+%
+% Changelog
+% 23/02/2012 - Version 1.1.0 by Marcelo Carlomagno Carlos <marcelo.carlos.2009@rhul.ac.uk>
+% 05/11/2009 - Version 1.0.0 by Marcelo Carlomagno Carlos <marcelo.carlos.2009@rhul.ac.uk>
+%
+%
+%%%%%%%%%%%%%%%%%%
+% Theme settings %
+%%%%%%%%%%%%%%%%%%
+% There are three themes:
+% - ISGShadow
+% - ISGMadrid
+% - ISGSingapore
+%
+% These themes support the following parameters:
+% - displaylogo to show the ISG logo on every slide or nologo to hide it (default=nologo). 
+% - displayfooter to show a footer on each slide or nofooter to hide it (default=nofooter).
+% - displaytocsection to show a table of contents in the beginning of every section or notocsection to hide it (default= notocsection).
+% - displaytocsubsection to show a table of contents in the beginning of every section or notocsubsection to hide it (default= notocsubsection).
+%
+% Is is recommended you install the theme in your system before using (see README.txt for details), however you can also just include the files in your project's folder.
+% If ISG beamer theme's files are only in your project's folder, use \usepackage other than \usetheme to use the theme (e.g. \usepackage{ISG/beamerthemeISGSingapore} instead of \usetheme{ISGSingapore}}. Please note that you also have to add the prefix "beamertheme" to the file name when you use the \usepackage command (there will be a Warning about this ("You have requested package `XXXX', but the package provides `YYYYY'") when compiling, you can ignore it)
+%
+% Examples:
+% \usetheme[displaylogo,displayfooter,displaytocsection]{ISGSingapore}
+% \usetheme[displaylogo]{ISGShadow}
+% \usepackage[displaylogo,displayfooter,displaytocsection]{ISG/beamerthemeISGSingapore} 
+% \usepackage[displaylogo]{ISG/beamerthemeISGShadow}
+%
+% Workaround to remove the TOC from header: if you want to remove the 'table of contents' from the header of themes, you can compile the document just once (then the .nav file is not generated yet and the TOC will not be created) or you can delete the .nav file before you compile.
+%
+
+% use the parameter [handout] to have a printer-friendly version of the slides (e.g. \documentclass[handout]{beamer}). Note: This option is not compatible with "overprint" (\begin{overprint}..\end{overprint}).
+\documentclass{beamer}
+
+%\usepackage[displaylogo,displayfooter,displaytocsection,displaytocsubsection]{ISG/beamerthemeISGShadow}
+\usepackage[displaylogo,displayfooter,displaytocsection,displaytocsubsection]{ISG/beamerthemeISGSingapore}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Presentation Title Content %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\title{Presentation Title}
+%\subtitle{Presentation Subtitle}
+\author[Author Short Name]{Author 1 \\ 
+		Author 2 \\
+		\{author1, author2\}@rhul.ac.uk}
+\institute[Information Security Group]{
+	\textbf{Information Security Group} \\ 
+	Royal Holloway University of London
+}
+\date[November 2009]{12 November 2009}
+
+%%%%%%%%%%%%%%%%%%
+% Document Start %
+%%%%%%%%%%%%%%%%%%
+\begin{document}
+
+%%%%%%%%%%%%%%%
+% Title Slide %
+%%%%%%%%%%%%%%%
+{
+\begin{frame}[plain] % frame of type 'plain' is an empty frame
+  \titlepage
+\end{frame}
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Table of Contents Slide %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\frame{
+	\frametitle{Contents}
+	\tableofcontents[hideallsubsections]
+	%\tableofcontents
+}
+
+%=============%
+% New Section %
+%=============%
+\section{Simple Slides}
+
+%================%
+% New Subsection %
+%================%
+\subsection{Items and Blocks}
+
+%%%%%%%%%%%%%%%
+% basic slide %
+%%%%%%%%%%%%%%%
+\frame{
+	\frametitle{Basic Slide Title}
+	\framesubtitle{Subtitle here}
+\begin{itemize}
+ \item Item 1
+ \item Item 2
+   \begin{itemize}
+    \item Subitem 1
+    \item Subitem 2
+   \end{itemize}
+ \item Item 3
+\end{itemize}
+}
+
+%%%%%%%%%%%%%%%%%%%%%
+% slide with blocks %
+%%%%%%%%%%%%%%%%%%%%%
+\frame{
+	\frametitle{Using blocks}
+	\framesubtitle{Subtitle}
+\begin{block}{Block Title}
+some content here
+\end{block}
+
+\begin{block}{}
+content without a title
+\end{block}
+}
+
+%================%
+% New Subsection %
+%================%
+\subsection{Images}
+
+%%%%%%%%%%%%%%%%%%%%
+% Inserting images %
+%%%%%%%%%%%%%%%%%%%%
+\frame {
+        \frametitle{Inserting images}
+        \framesubtitle{simple image}
+\begin{figure} % if you don't want to use caption,you can remove the begin{figure} and end{figure}
+\begin{center}
+		\includegraphics[width=0.85\textwidth]{ISG/graphics/general/isg-logo.png} 
+		\caption{Image caption (Optional)}
+\end{center}
+\end{figure}
+}
+
+%================%
+% New Subsection %
+%================%
+\subsection{Empty slide}
+
+%%%%%%%%%%%%%%%%%%%
+% Slide em branco %
+%%%%%%%%%%%%%%%%%%%
+\frame[plain]{
+\begin{center}
+  Empty slide ... without footer, header,etc
+\end{center}
+}
+
+%=============%
+% New section %
+%=============%
+\section{Advanced content}
+
+%================%
+% New Subsection %
+%================%
+\subsection{Verbatim}
+
+%%%%%%%%%%%%
+% Verbatim %
+%%%%%%%%%%%%
+\defverbatim[colored]\samplexml{%
+   \small\begin{lstlisting}[language=XML,frame=none,emph={},emphstyle=\textbf]
+<Signature>
+       <SignedInfo>
+              <CanonicalizationMethod/>
+              <SignatureMethod/>
+              <Reference>              
+                     <DigestMethod>
+                     <DigestValue>
+              </Reference>
+       </SignedInfo>
+       <SignatureValue/>
+</Signature>
+\end{lstlisting}}
+
+\frame{
+	\frametitle{Verbatim Slide}
+	\framesubtitle{XMLDSIG}
+	\samplexml
+}
+
+%================%
+% New Subsection %
+%================%
+\subsection{Watermark}
+%%%%%%%%%%%%%%%%%%%
+% Watermark slide %
+%%%%%%%%%%%%%%%%%%%
+{
+% to use a watermark,you have to create a background picture which its size is around 800 x 618 pixels. dont forget to make it transparent 
+\usebackgroundtemplate{\includegraphics[width=1.0\paperwidth]{ISG/graphics/general/isg-logo-watermark.png}}
+\frame{
+	\frametitle{Inserting Watermaks}
+	\framesubtitle{Slide Subtitle}
+\begin{itemize}
+ \item Item 1
+ \item Item 2
+   \begin{itemize}
+    \item Subitem 1
+    \item Subitem 2
+   \end{itemize}
+ \item Item 3
+\end{itemize}
+}
+} % close this brace where do you want to stop using watermark
+
+
+%=============%
+% New subsection %
+%=============%
+\subsection{Overlays}
+
+\frame{
+	\frametitle{Items appearing one by one}
+\begin{itemize}[<+->]
+ \item Item 1
+ \item Item 2
+   \begin{itemize}
+    \item Subitem 1
+    \item Subitem 2
+   \end{itemize}
+ \item Item 3
+\end{itemize}
+}
+
+\frame{
+	\frametitle{Items appearing one by one}
+	\framesubtitle{Highlighting current item}
+\begin{itemize}[<+- | alert@+>]
+ \item Item 1
+ \item Item 2
+   \begin{itemize}
+    \item Subitem 1
+    \item Subitem 2
+   \end{itemize}
+ \item Item 3
+\end{itemize}
+}
+
+%================%
+% New Subsection %
+%================%
+\subsection{Tables}
+%%%%%%%%%%%%%%%
+% Table slide %
+%%%%%%%%%%%%%%%
+\frame{
+	\frametitle{Using tables}
+	\begin{table}[htb]
+		\begin{center}\large
+		\begin{tabular}{ c | c | c }
+			\hline				
+				\textbf{Header 1} & \textbf{Header 2} & \textbf{Header 3} \\			
+			\hline
+				Content 1 & Content 2 & Content 3 \\
+			\hline
+				Content 4 & Content 5 & Content 6 \pause\\ % you can also use overlays here
+			\hline
+				Content 7 & Content 8 & Content 9 \\
+			\hline
+		\end{tabular}
+		\end{center}
+		\caption{Table caption (optional)}
+	\end{table}
+	
+}
+
+%================%
+% New Subsection %
+%================%
+\section{Other}
+%================%
+% New Subsection %
+%================%
+\subsection{Equations}
+
+%%%%%%%%%%%%%%%%%%%
+% Equations slide %
+%%%%%%%%%%%%%%%%%%%
+\frame{
+	\frametitle{Equations}
+\begin{equation}
+\label{first} a=b+c 
+\end{equation} 
+
+\pause some text \pause
+
+\begin{subequations}\label{grp} 
+	\begin{align} 
+		a&=b+c\label{second}\\
+		d&=e+f+g\label{third}\\
+		h&=i+j\label{fourth} 
+	\end{align}
+\end{subequations}
+}
+
+%================%
+% New Subsection %
+%================%
+\subsection{Proofs, Theorems and Overprint}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Proofs, Theorems and Overprint slide %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\frame{
+	\frametitle{Proofs, Theorems and Overprint}
+	
+	\begin{theorem}
+		Here is a theorem
+	\end{theorem}
+
+	\begin{overprint}
+		\onslide<1>
+			\begin{alertblock}{Proof.}
+				Here is the first (bad) proof, in red.
+			\end{alertblock}
+		\onslide<2>
+			\begin{exampleblock}{Proof.}
+				Here is the second ...
+			\end{exampleblock}
+		\onslide<3>
+			\begin{block}{Proof.}
+				Here is the third (presumably correct) ...
+			\end{block}
+	\end{overprint}
+}
+
+%=============%
+% New Section %
+%=============%
+\subsection{Colors and Highlights}
+
+%%%%%%%%%%
+% Colors %
+%%%%%%%%%%
+\frame{
+	\frametitle{Colors}
+	
+	\begin{itemize}
+		 \item \color{blue}{It is easy to change the text color}
+		 \item \color{green}{green}
+		 \item \color{red}{red}
+		 \item \color{black}There are also some pre-defined colors for this theme
+   		\begin{itemize}
+    		\item \color{isgdarkblue}{isgdarkblue}
+		    \item \color{isgmediumblue}{isgmediumblue}
+		    \item \color{isglightblue}{isglightblue}
+		    \item \color{isggreen}{isggreen}
+			\item \color{isggrey}{isggrey}
+		    \item \color{rhulblue}{rhulblue}
+		    \item \color{rhulorange}{rhulorange}
+ 		    \item \color{rhulgreen}{rhulgreen}		    		    		    		   
+	   \end{itemize}
+	\end{itemize}	
+	 % for a full set of colors, look at http://www.math.umbc.edu/~rouben/beamer/quickstart-Z-H-24.html#node_sec_24
+}
+
+%%%%%%%%%%%%%%
+% Highlights %
+%%%%%%%%%%%%%%
+\frame{
+	\frametitle{Highlights}
+	\bigskip
+	\fcolorbox{red}{yellow}{A yellow box with red border}
+	\bigskip	
+	\setlength{\fboxrule}{4pt} 
+	\fcolorbox{red}{white}{A white box with red border of 4 points of thickness} 
+}
+
+%=============%
+% New Section %
+%=============%
+\subsection{Splitting a slide into columns}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Splitting a slide into columns %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+  \frametitle{Splitting a slide into columns}
+
+You can also split the slide content into columns, even if you start the slide writing across the columns
+\bigskip
+\begin{columns}
+
+  \begin{column}{0.4\textwidth}
+    Here is the first column. You can put some items here.
+    \begin{itemize}
+      \item Item 1
+      \item Item 2
+      \item Item 3
+    \end{itemize}
+  \end{column}
+
+  \begin{column}{0.4\textwidth}
+    Here is the second column. You can put a image here.
+    \centerline{\includegraphics[width=0.9\textwidth]{ISG/graphics/general/rhul-logo-darkblue.png}}
+  \end{column}
+  
+\end{columns}
+
+\bigskip
+
+At the end, you can write another line The line from the left to right margin.
+
+\end{frame}
+
+\end{document}

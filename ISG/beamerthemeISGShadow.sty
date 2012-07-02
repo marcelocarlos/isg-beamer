@@ -1,0 +1,225 @@
+% The ISGMadrid theme is derived from the Madrid theme.
+%
+% All the changes are (c) 2012 by Marcelo Carlos <marcelo.carlos.2009@rhul.ac.uk> and are
+% provided under the same license as the original.
+%
+% Changelog
+% 23/02/2012 - Version 1.1.0 by Marcelo Carlomagno Carlos <marcelo.carlos.2009@rhul.ac.uk>
+% 05/11/2009 - Version 1.0.0 by Marcelo Carlomagno Carlos <marcelo.carlos.2009@rhul.ac.uk>
+%
+%
+% Copyright 2007 by Till Tantau
+%
+% This file may be distributed and/or modified
+%
+% 1. under the LaTeX Project Public License and/or
+% 2. under the GNU Public License.
+%
+
+\ProvidesPackage{beamerthemeISGShadow}[2012/23/02]
+
+\RequirePackage{ISG/ISGCommon}
+
+\usetheme{shadow}
+\useinnertheme{rectangles}
+
+%%%%%%%%%%%%%%
+% PARAMETERS %
+%%%%%%%%%%%%%%
+% Toggle ISG's logo on every slide
+\newif\ifdisplaylogo
+\DeclareOption{displaylogo}{\displaylogotrue}
+\DeclareOption{nologo}{\displaylogofalse}
+
+% Toggle footer
+\newif\ifdisplayfooter
+\DeclareOption{displayfooter}{\displayfootertrue}
+\DeclareOption{nodisplayfooter}{\displayfooterfalse}
+
+% Toggle TOC at every section
+\newif\ifdisplaytocsection
+\DeclareOption{displaytocsection}{\displaytocsectiontrue}
+\DeclareOption{notocsection}{\displaytocsectionfalse}
+
+% Toggle TOC at every subsection
+\newif\ifdisplaytocsubsection
+\DeclareOption{displaytocsubsection}{\displaytocsubsectiontrue}
+\DeclareOption{notocsubsection}{\displaytocsubsectionfalse}
+
+\ProcessOptions
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Theme specific settings %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\setbeamertemplate{navigation symbols}{} %remove navigation buttons
+
+%%%%%%%%%%%%%%%%%%%%%%%%%
+% Redefining Title Page %
+%%%%%%%%%%%%%%%%%%%%%%%%%
+\defbeamertemplate*{title page}{ISG}
+{
+\usebackgroundtemplate{\includegraphics[width=1.0\paperwidth]{ISG/graphics/general/watermark-logo.png}} % background image to insert the ISG and RHUL logo
+	\begin{center}
+		\vspace{44pt}
+  		\usebeamerfont{title}\textbf{\color{isgmediumblue}{\inserttitle}}\par
+  		\usebeamerfont{subtitle}\color{black}\insertsubtitle\par
+  		\vspace{16pt}
+  		\usebeamerfont{author}\insertauthor\par
+  		\vspace{12pt}
+ 		\usebeamerfont{institute}\insertinstitute\par
+ 		\vspace{12pt}
+  		\usebeamerfont{date}\color{isglightblue}{\insertdate}\par
+	  	\usebeamercolor[fg]{titlegraphic}\inserttitlegraphic
+		\vspace*{28pt}
+	  	\includegraphics[width=1\textwidth]{ISG/graphics/general/titlepage-logo.png}
+    \end{center}
+}
+
+
+\mode<presentation>
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Applying the parameters defined above %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% ISG logo
+\ifdisplaylogo
+	\logo{\includegraphics[width=0.32\paperwidth]{ISG/graphics/general/isg-logo.png}\hspace*{0.1cm}}
+\fi
+
+
+% Footer
+\ifdisplayfooter
+	\usefoottemplate{\vbox{%
+	\tinycolouredline{structure}
+	  {\color{white}\insertshorttitle \hskip 5pt -- \insertshortauthor \hfill \insertframenumber / 	\inserttotalframenumber}
+	}}
+\fi
+
+
+% TOC Section
+\ifdisplaytocsection
+	\AtBeginSection[]
+	{
+		\begin{frame}
+			\frametitle{\insertsection}
+			\tableofcontents[sectionstyle=show/shaded,subsectionstyle=show/show/hide]
+		\end{frame}
+	}
+\fi
+
+% TOC SubSection
+\ifdisplaytocsubsection
+	\AtBeginSubsection[]
+	{
+		\begin{frame}
+			\frametitle{\insertsubsection}
+			\tableofcontents[sectionstyle=show/shaded,subsectionstyle=show/shaded/hide]
+		\end{frame}
+	}
+\fi
+
+
+%%%%%%%%%%%%%%%%%%
+% COLOR SETTINGS % 
+%%%%%%%%%%%%%%%%%%
+%%% TITLE %%%
+%\setbeamertemplate{title page}[default][colsep=-4bp,rounded=true,shadow=true]
+%\setbeamercolor*{titlelike}{fg=white,bg=isgmediumblue}
+%\setbeamercolor*{title}{parent=titlelike}	
+%\setbeamercolor*{title in head/foot}{fg=white,bg=isgmediumblue}
+%\setbeamercolor*{title in sidebar}{parent=palette sidebar quaternary}
+%\setbeamercolor*{subtitle}{parent=title}
+
+%%% COVER %%%
+%\setbeamercolor*{author}{}
+%\setbeamerfont*{author}{shape=\upshape,series=\bfseries}
+\setbeamerfont*{author}{shape=\itshape}
+%\setbeamercolor*{author in head/foot}{parent=palette primary}
+%\setbeamercolor*{author in sidebar}{use=palette sidebar tertiary,fg=palette sidebar tertiary.fg}
+%\setbeamercolor*{institute}{}
+\setbeamerfont{institute}{size=\small}
+%\setbeamercolor*{institute in head/foot}{parent=palette tertiary}
+%\setbeamercolor*{institute in sidebar}{use=palette sidebar tertiary,fg=palette sidebar tertiary.fg}
+\setbeamercolor*{date}{fg=isglightblue}
+\setbeamerfont{date}{size=\footnotesize}
+%\setbeamercolor*{date in head/foot}{parent=palette secondary}
+%\setbeamercolor*{date in sidebar}{use=palette sidebar tertiary,fg=palette sidebar tertiary.fg}
+
+%%% SECTION %%%
+%\setbeamercolor*{section in toc}{parent=structure}
+%\setbeamercolor*{section in toc shaded}{parent=section in toc}
+%\setbeamercolor*{section in head/foot}{fg=white,bg=black}
+%\setbeamercolor*{section in sidebar}{parent=palette sidebar secondary}
+%\setbeamercolor*{section in sidebar shaded}{use=section in sidebar,fg=section in sidebar.fg!40!bg}
+%\setbeamercolor*{section number projected}{parent=item projected}
+
+%%% SUBSECTION %%%
+%\setbeamercolor*{subsection in toc}{}
+%\setbeamercolor*{subsection in toc shaded}{parent=subsection in toc}
+\setbeamercolor*{subsection in head/foot}{bg=isgmediumblue,fg=white}
+%\setbeamercolor*{subsection in sidebar}{parent=palette sidebar primary}
+%\setbeamercolor*{subsection in sidebar shaded}{use=subsection in sidebar,fg=subsection in sidebar.fg!40!bg}
+%\setbeamercolor*{subsection number projected}{parent={subitem projected}}
+
+%%% SUBSUBSECTION %%%
+%\setbeamercolor*{subsubsection in toc}{parent=subsection in toc}
+%\setbeamercolor*{subsubsection in toc shaded}{parent=subsubsection in toc}
+%\setbeamercolor*{subsubsection in head/foot}{parent=subsection in head/foot}
+%\setbeamercolor*{subsubsection in sidebar}{parent=subsection in sidebar}
+%\setbeamercolor*{subsubsection in sidebar shaded}{parent=subsection in sidebar shaded}
+%\setbeamercolor*{subsubsection number projected}{parent=subsubitem projected}
+
+%%% SIDEBAR %%%
+%\setbeamercolor*{sidebar}{}
+%\setbeamercolor*{sidebar left}{parent=sidebar}
+%\setbeamercolor*{sidebar right}{parent=sidebar}
+
+%%% FRAMES %%%
+\setbeamercolor*{frametitle}{bg=isgmediumblue,fg=white}
+\setbeamercolor*{framesubtitle}{parent=frametitle}
+\setbeamercolor*{frametitle right}{bg=isglightblue}
+
+%%% BLOCKS %%%
+\setbeamertemplate{blocks}[rounded][shadow=true]
+\setbeamercolor*{block body}{bg=isglightgrey,fg=isggrey}
+%\setbeamercolor*{block body alerted}{}
+%\setbeamercolor*{block body example}{}
+\setbeamercolor*{block title}{bg=isgmediumblue,fg=white}
+\setbeamercolor*{block title alerted}{bg=red,fg=white}
+\setbeamercolor*{block title example}{bg=rhulorange,fg=white}
+
+
+%%% SEPARATION LINES / HEADER / FOOTER %%%
+%\setbeamercolor*{separation line}{}
+%\setbeamercolor*{upper separation line head}{parent=separation line}
+%\setbeamercolor*{middle separation line head}{parent=separation line}
+%\setbeamercolor*{lower separation line head}{parent=separation line}
+%\setbeamercolor*{upper separation line foot}{parent=separation line}
+%\setbeamercolor*{middle separation line foot}{parent=separation line}
+%\setbeamercolor*{lower separation line foot}{parent=separation line}
+
+%%% ITEMS / ENUMERATE / DESCRIPTION %%%
+\setbeamercolor*{item}{bg=white,fg=rhulorange}
+%\setbeamercolor*{subitem}{parent=item}
+%\setbeamercolor*{subsubitem}{parent=subitem}
+%\setbeamercolor*{item projected}{parent=item,use=item,fg=white,bg=blue}
+%\setbeamercolor*{subitem projected}{parent=item projected}
+%\setbeamercolor*{subsubitem projected}{parent=subitem projected}
+%\setbeamercolor*{enumerate item}{parent=item}
+%\setbeamercolor*{enumerate subitem}{parent=subitem}
+%\setbeamercolor*{enumerate subsubitem}{parent=subsubitem}
+%\setbeamercolor*{itemize item}{parent=item}
+%\setbeamercolor*{itemize subitem}{parent=subitem}
+%\setbeamercolor*{itemize subsubitem}{parent=subsubitem}
+%\setbeamercolor*{itemize/enumerate body}{}
+%\setbeamercolor*{itemize/enumerate subbody}{}
+%\setbeamercolor*{itemize/enumerate subsubbody}{}
+%\setbeamercolor*{description item}{parent=item}
+
+%%% TEXT %%%
+%\setbeamercolor*{normal text}{fg=black,bg=white}
+\setbeamercolor*{alerted text}{fg=isgmediumblue,bg=white}
+
+\mode
+<all>
